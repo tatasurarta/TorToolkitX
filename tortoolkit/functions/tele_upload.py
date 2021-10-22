@@ -21,6 +21,8 @@ from pyrogram.types import (
 from telethon.errors import VideoContentTypeInvalidError
 from telethon.tl.types import KeyboardButtonCallback
 from telethon.utils import get_attributes
+from pyrogram.errors import FloodWait
+from telethon.errors.rpcerrorlist import FloodWaitError
 
 from .. import user_db
 from ..core import (

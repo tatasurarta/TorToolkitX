@@ -5,6 +5,8 @@
 import asyncio
 import logging
 import os
+import time
+import requests
 from functools import partial
 
 import aria2p

@@ -450,6 +450,8 @@ async def upload_a_file(
                         attributes=attrs,
                         thumb=thumb_path,
                     )
+    except (FloodWaitError, FloodWait) as t:
+        await asyncio.sleep(t.x)
     except Exception as e:
         if str(e).find("cancel") != -1:
             torlog.info("Canceled an upload lol")
@@ -471,7 +473,7 @@ async def upload_a_file(
 
 
 def black_list_exts(file):
-    for i in ["!qb"]:
+    for i in ["!qb", ".html", ".jpg", ".url", ".nfo", ".txt"]:
         if str(file).lower().endswith(i):
             return True
 
@@ -509,7 +511,7 @@ async def upload_single_file(
         force_docs = get_val("FORCE_DOCUMENTS")
 
     # Avoid Flood in Express
-    await asyncio.sleep(15)
+    await asyncio.sleep(7)
 
     metadata = extractMetadata(createParser(path))
 
